@@ -1,0 +1,38 @@
+.contactSection {
+  text-align: center;
+  margin-top: 6rem;
+  padding: 4rem 2rem;
+  border-radius: 12px;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.emailLink {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.emailLink:hover {
+  background-color: #e5e7eb;
+  text-decoration: none;
+}
