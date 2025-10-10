@@ -11,6 +11,13 @@ type Project = {
 
 const myProjects: Project[] = [
   {
+    title: 'OCR KTP Indonesia & Generate SKCK PDF',
+    description: 'A website to extract information data in KTP Indonesia using python tesseract and generate SKCK PDF with template',
+    tags: ['Python', 'Tesseract', 'OCR', 'HTML', 'CSS', 'JavaScript', 'Dockerfile', 'Railway'],
+    repoUrl: 'https://github.com/grimmjow-coder/ktp-to-skck-web',
+    liveUrl: 'https://ocr-ktp.up.railway.app/',
+  },
+  {
     title: 'Madani Hukum',
     description: 'A centralized legal information portal for searching and accessing Indonesian law documents, featuring a dynamic admin content management system.',
     tags: ['React.js', 'Node.js', 'MySQL', 'Vercel', 'Railway'],
@@ -22,7 +29,7 @@ const myProjects: Project[] = [
     description: 'API to handle submit RIG inspection and handle notification using firebase',
     tags: ['Golang', 'PostgreSQL', 'Firebase', 'REST API'],
     repoUrl: 'https://github.com/grimmjow-coder/rig-api'
-  },
+  }
 ];
 
 export default function Projects() {

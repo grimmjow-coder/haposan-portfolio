@@ -1,10 +1,27 @@
+/* app/globals.css */
+
 :root {
+  /* Variabel untuk Tema Terang (Light Mode) */
   --background-color: #ffffff;
   --text-color: #111827;
   --primary-color: #3b82f6;
   --card-background: #f9fafb;
   --border-color: #e5e7eb;
+  --secondary-text-color: #4b5563; /* Tambahan untuk teks sekunder */
 }
+
+/* --- BLOK BARU UNTUK DARK MODE --- */
+html.dark {
+  /* Variabel yang sama, tetapi dengan nilai warna yang berbeda untuk Tema Gelap */
+  --background-color: #111827; /* Menggunakan warna teks lama sebagai background */
+  --text-color: #f9fafb;       /* Menggunakan warna kartu lama sebagai teks */
+  --primary-color: #60a5fa;      /* Biru yang lebih terang agar kontras */
+  --card-background: #1f2937;    /* Abu-abu gelap untuk kartu */
+  --border-color: #374151;      /* Abu-abu yang lebih gelap untuk border */
+  --secondary-text-color: #9ca3af; /* Abu-abu terang untuk teks sekunder */
+}
+/* --- AKHIR BLOK BARU --- */
+
 
 * {
   box-sizing: border-box;
@@ -21,6 +38,7 @@ body {
 body {
   color: var(--text-color);
   background: var(--background-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 a {
@@ -36,4 +54,41 @@ a:hover {
   max-width: 1024px;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+/* Tambahkan blok kode ini di bagian paling bawah file app/globals.css */
+
+/* --- Aturan Responsif --- */
+
+/* Untuk layar tablet dan di bawahnya (lebar maksimal 768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem; /* Kurangi padding di sisi kiri dan kanan */
+    }
+
+    .intro h1 {
+        font-size: 2rem; /* Perkecil ukuran judul utama */
+    }
+
+    /* Kunci utama: Ubah grid proyek menjadi satu kolom */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Untuk layar ponsel (lebar maksimal 480px) */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column; /* Susun logo dan navigasi secara vertikal */
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .intro h1 {
+        font-size: 1.8rem;
+    }
+    
+    .intro p {
+        font-size: 1rem;
+    }
 }
