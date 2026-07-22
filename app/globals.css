@@ -1,27 +1,42 @@
 /* app/globals.css */
 
 :root {
-  /* Variabel untuk Tema Terang (Light Mode) */
-  --background-color: #ffffff;
-  --text-color: #111827;
-  --primary-color: #3b82f6;
-  --card-background: #f9fafb;
-  --border-color: #e5e7eb;
-  --secondary-text-color: #4b5563; /* Tambahan untuk teks sekunder */
+  /* Light mode (tetap didukung, tapi dark-first) */
+  --bg: #fafafb;
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-solid: #ffffff;
+  --border: rgba(15, 15, 25, 0.1);
+  --border-strong: rgba(15, 15, 25, 0.18);
+  --text: #12121a;
+  --text-dim: #55555f;
+  --text-faint: #8a8a95;
+  --accent: #7c3aed;
+
+  /* Aksen holografik MCP: pink -> violet -> cyan */
+  --grad: linear-gradient(100deg, #ec4899 0%, #8b5cf6 45%, #22d3ee 100%);
+  --glow-a: rgba(236, 72, 153, 0.18);
+  --glow-b: rgba(34, 211, 238, 0.16);
+  --grid-line: rgba(15, 15, 25, 0.05);
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, "SF Mono", monospace;
 }
 
-/* --- BLOK BARU UNTUK DARK MODE --- */
 html.dark {
-  /* Variabel yang sama, tetapi dengan nilai warna yang berbeda untuk Tema Gelap */
-  --background-color: #111827; /* Menggunakan warna teks lama sebagai background */
-  --text-color: #f9fafb;       /* Menggunakan warna kartu lama sebagai teks */
-  --primary-color: #60a5fa;      /* Biru yang lebih terang agar kontras */
-  --card-background: #1f2937;    /* Abu-abu gelap untuk kartu */
-  --border-color: #374151;      /* Abu-abu yang lebih gelap untuk border */
-  --secondary-text-color: #9ca3af; /* Abu-abu terang untuk teks sekunder */
-}
-/* --- AKHIR BLOK BARU --- */
+  --bg: #08080c;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-solid: #101018;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --text: #e8e8f0;
+  --text-dim: #9a9aa8;
+  --text-faint: #63636f;
+  --accent: #a78bfa;
 
+  --glow-a: rgba(236, 72, 153, 0.22);
+  --glow-b: rgba(34, 211, 238, 0.20);
+  --grid-line: rgba(255, 255, 255, 0.04);
+}
 
 * {
   box-sizing: border-box;
@@ -36,59 +51,90 @@ body {
 }
 
 body {
-  color: var(--text-color);
-  background: var(--background-color);
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s, color 0.3s;
+  position: relative;
+}
+
+/* Glow blob holografik — di belakang konten */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(50rem 40rem at 15% -10%, var(--glow-a), transparent 60%),
+    radial-gradient(45rem 40rem at 100% 10%, var(--glow-b), transparent 55%);
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+/* Grid halus di atas glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
+}
+
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(0, -3%, 0) scale(1.08); }
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--accent);
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
 .container {
-  max-width: 1024px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-/* Tambahkan blok kode ini di bagian paling bawah file app/globals.css */
-
-/* --- Aturan Responsif --- */
-
-/* Untuk layar tablet dan di bawahnya (lebar maksimal 768px) */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 1.5rem; /* Kurangi padding di sisi kiri dan kanan */
-    }
-
-    .intro h1 {
-        font-size: 2rem; /* Perkecil ukuran judul utama */
-    }
-
-    /* Kunci utama: Ubah grid proyek menjadi satu kolom */
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
+/* Utility: teks gradient holografik */
+.gradient-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* Untuk layar ponsel (lebar maksimal 480px) */
-@media (max-width: 480px) {
-    header {
-        flex-direction: column; /* Susun logo dan navigasi secara vertikal */
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-    
-    .intro h1 {
-        font-size: 1.8rem;
-    }
-    
-    .intro p {
-        font-size: 1rem;
-    }
+/* Label mono kecil ala terminal */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  body::after { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 1.25rem; }
 }

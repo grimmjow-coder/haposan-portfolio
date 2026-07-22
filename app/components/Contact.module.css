@@ -1,38 +1,95 @@
 .contactSection {
+  scroll-margin-top: 6rem;
   text-align: center;
-  margin-top: 6rem;
-  padding: 4rem 2rem;
-  border-radius: 12px;
-  background-color: var(--card-background);
-  border: 1px solid var(--border-color);
+  margin: 7rem 0 4rem;
+  padding: 4.5rem 2rem;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow gradient di dalam kartu contact */
+.contactSection::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  width: 40rem;
+  height: 40rem;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.contactSection > * {
+  position: relative;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0.8rem auto 1rem;
+  max-width: 620px;
 }
 
 .description {
-  color: var(--text-color);
-  margin-bottom: 1.5rem;
-  max-width: 450px;
-  margin-left: auto;
-  margin-right: auto;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  margin: 0 auto 2rem;
+  max-width: 460px;
 }
 
 .emailLink {
-  font-weight: 500;
-  font-size: 1.1rem;
-  color: var(--primary-color);
-  text-decoration: none;
   display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: background-color 0.2s ease-in-out;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.85rem 1.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .emailLink:hover {
-  background-color:var(--card-background);
-  text-decoration: none;
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px -12px rgba(139, 92, 246, 0.6);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.footerLinks {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.footerLinks a {
+  color: var(--text-faint);
+  transition: color 0.2s;
+}
+
+.footerLinks a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .contactSection { padding: 3rem 1.25rem; }
+  .footer { flex-direction: column; gap: 0.8rem; }
 }
